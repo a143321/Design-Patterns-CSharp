@@ -241,11 +241,6 @@ namespace State_Pattern_CSharp
         {
             this.HeaterContext = someHeaterContext;
 
-            new PowerOffState();
-            new IdleState();
-            new WarmState();
-            new HeatState();
-
             if (state == null)
             {
                 state = new PowerOffState();
