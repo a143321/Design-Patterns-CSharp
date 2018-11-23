@@ -188,9 +188,6 @@ namespace State_Pattern_CSharp
     /// <summary>
     /// 電気ポット状態を表すクラス
     /// </summary>
-    /// <remarks>
-    /// 状態毎に振舞いが異なるメソッドのインタフェースを定義
-    /// </remarks>
     public interface IState
     {
         IState PushPowerBtnEvent();
@@ -228,9 +225,6 @@ namespace State_Pattern_CSharp
     /// <summary>
     /// 電気ポット制御情報クラス
     /// </summary>
-    /// <remarks>
-    /// ヒーター設定が変更された場合は、ヒーター設定パラメータクラスのインタスタンスのみを更新する
-    /// </remarks>
     public class PotContext
     {
         /// <summary>
