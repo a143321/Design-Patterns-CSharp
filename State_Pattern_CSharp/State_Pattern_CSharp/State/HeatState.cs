@@ -5,11 +5,6 @@
     /// </summary>
     public class HeatState : IState
     {
-        /// <summary>
-        /// 自己状態変数
-        /// </summary>
-        public static readonly IState sIntance = new HeatState();
-
         public HeatState()
         {
         }
@@ -21,7 +16,7 @@
 
         public IState PushStopBtnEvent()
         {
-            return IdleState.sIntance;
+            return new IdleState();
         }
 
         public IState PushHeatBtnEvent()
@@ -33,7 +28,7 @@
         {
             if (Thermometer.CurrentTemp >= someHeaterContext.MaxTemperature)
             {
-                return WarmState.sIntance;
+                return new WarmState();
             }
 
             return this;

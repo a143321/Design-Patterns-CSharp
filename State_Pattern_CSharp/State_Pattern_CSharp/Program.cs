@@ -123,7 +123,7 @@ namespace State_Pattern_CSharp
         /// <param name="context"></param>
         public static void ChangeWaterTemperatureEventHandler(PotContext context)
         {
-            context.MeasureTemperature(context.HeaterContext);
+            context.MeasureTemperature();
 
             if (context.GetState().GetType() == typeof(PowerOffState))
             {
@@ -176,6 +176,7 @@ namespace State_Pattern_CSharp
     /// <summary>
     /// 水温温度計クラス。
     /// </summary>
+    /// <remarks>時間経過によって状態遷移させるための仕組みとしてのクラスであるため、staticクラスとしている</remarks>
     public static class Thermometer
     {
         /// <summary>
@@ -235,7 +236,7 @@ namespace State_Pattern_CSharp
         /// <summary>
         ///　電気ポットの稼働状態
         /// </summary>
-        private IState State = null;
+        private IState state = null;
 
         /// <summary>
         /// ヒーター設定パラメーター
@@ -251,40 +252,40 @@ namespace State_Pattern_CSharp
             new WarmState();
             new HeatState();
 
-            if (State == null)
+            if (state == null)
             {
-                State = PowerOffState.sIntance;
+                state = new PowerOffState();
             }
         }
 
         public IState GetState()
         {
-            return this.State;
+            return this.state;
         }
 
         public void ShowCurrentState()
         {
-            Console.WriteLine("[IState : {0}] [Current Temperature : {1}] [Heater Mode : {2}]\n\n\n", this.State.ToString(), Thermometer.CurrentTemp, this.HeaterContext.HeaterMode.ToString());
+            Console.WriteLine("[IState : {0}] [Current Temperature : {1}] [Heater Mode : {2}]\n\n\n", this.state.ToString(), Thermometer.CurrentTemp, this.HeaterContext.HeaterMode.ToString());
         }
 
         public void PushPowerBtn()
         {
-            this.State = this.State.PushPowerBtnEvent();
+            this.state = this.state.PushPowerBtnEvent();
         }
 
         public void PushStopBtn()
         {
-            this.State = this.State.PushStopBtnEvent();
+            this.state = this.state.PushStopBtnEvent();
         }
 
         public void PushHeatBtn()
         {
-            this.State = this.State.PushHeatBtnEvent();
+            this.state = this.state.PushHeatBtnEvent();
         }
 
-        public void MeasureTemperature(HeaterContext someHeaterContext)
+        public void MeasureTemperature()
         {
-            this.State = this.State.MeasureTemperatureEvent(someHeaterContext);
+            this.state = this.state.MeasureTemperatureEvent(this.HeaterContext);
         }
     }
 }

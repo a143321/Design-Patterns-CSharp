@@ -5,18 +5,13 @@
     /// </summary>
     public class IdleState : IState
     {
-        /// <summary>
-        /// 自己状態変数
-        /// </summary>
-        public static readonly IState sIntance = new IdleState();
-
         public IdleState()
         {
         }
 
         public IState PushPowerBtnEvent()
         {
-            return PowerOffState.sIntance;
+            return new PowerOffState();
         }
 
         public IState PushStopBtnEvent()
@@ -26,7 +21,7 @@
 
         public IState PushHeatBtnEvent()
         {
-            return HeatState.sIntance;
+            return new HeatState();
         }
 
         public IState MeasureTemperatureEvent(HeaterContext someHeaterContext)

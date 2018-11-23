@@ -5,18 +5,13 @@
     /// </summary>
     public class PowerOffState : IState
     {
-        /// <summary>
-        /// 自己状態変数
-        /// </summary>
-        public static readonly IState sIntance = new PowerOffState();
-
         public PowerOffState()
         {
         }
 
         public IState PushPowerBtnEvent()
         {
-            return IdleState.sIntance;
+            return new IdleState();
         }
 
         public IState PushStopBtnEvent()

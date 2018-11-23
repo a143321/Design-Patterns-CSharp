@@ -5,38 +5,33 @@
     /// </summary>
     public class WarmState : IState
     {
-        /// <summary>
-        /// 自己状態変数
-        /// </summary>
-        public static readonly IState sIntance = new WarmState();
-
         public WarmState()
         {
         }
 
         public IState PushPowerBtnEvent()
         {
-            return null;
+            return this;
         }
 
         public IState PushStopBtnEvent()
         {
-            return IdleState.sIntance;
+            return new IdleState();
         }
 
         public IState PushHeatBtnEvent()
         {
-            return HeatState.sIntance;
+            return new HeatState();
         }
 
         public IState MeasureTemperatureEvent(HeaterContext someHeaterContext)
         {
             if (Thermometer.CurrentTemp <= someHeaterContext.MinTemperature)
             {
-                return HeatState.sIntance;
+                return new HeatState();
             }
 
-            return sIntance;
+            return this;
         }
     }
 }
