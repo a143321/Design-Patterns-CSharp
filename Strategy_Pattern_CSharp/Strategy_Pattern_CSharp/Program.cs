@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Strategy_Pattern_CSharp
 {
@@ -55,39 +51,50 @@ namespace Strategy_Pattern_CSharp
     /// </summary>
     public interface QuackBehavior
     {
-        void quack();
+        void sound();
     }
 
     /// <summary>
-    /// ガーガー鳴く
+    /// 静かな(アヒルなどの)ガーガー鳴き声クラス
+    /// </summary>
+    public class SmallQuack : QuackBehavior
+    {
+        public void sound()
+        {
+            System.Console.WriteLine("Normal sound : kua! kua!");
+        }
+    }
+
+    /// <summary>
+    /// (アヒルなどの)ガーガー鳴き声クラス
     /// </summary>
     public class Quack : QuackBehavior
     {
-        public void quack()
+        public void sound()
         {
-            System.Console.WriteLine("gua-gua");
+            System.Console.WriteLine("Noisy Sound : !!!!gua-gua!!!!");
         }
     }
 
     /// <summary>
-    /// チューチュー鳴く
+    /// キュッキュッ鳴る鳴き声クラス
     /// </summary>
     public class Squeak : QuackBehavior
     {
-        public void quack()
+        public void sound()
         {
-            System.Console.WriteLine("kyu-kyu");
+            System.Console.WriteLine("Cute sound : kyu-kyu");
         }
     }
 
     /// <summary>
-    /// 何も鳴かない
+    /// 無音鳴き声クラス
     /// </summary>
     public class MuteQuack : QuackBehavior
     {
-        public void quack()
+        public void sound()
         {
-            System.Console.WriteLine("<<mute>>");
+            System.Console.WriteLine("No sound : <<mute>>");
         }
     }
 
@@ -99,16 +106,19 @@ namespace Strategy_Pattern_CSharp
         /// <summary>
         /// 鳴き声
         /// </summary>
-        protected QuackBehavior cry = new Quack();
+        protected QuackBehavior quackBehavior;
 
-        public Duck() { }
+        public Duck()
+        {
+            quackBehavior = new SmallQuack();
+        }
 
         /// <summary>
         /// 鳴き声を発する
         /// </summary>
         public void quack()
         {
-            cry.quack();
+            quackBehavior.sound();
         }
     }
 
@@ -119,7 +129,7 @@ namespace Strategy_Pattern_CSharp
     {
         public RedHeadDuck()
         {
-            cry = new Quack();
+            quackBehavior = new Quack();
         }
     }
 
@@ -130,7 +140,7 @@ namespace Strategy_Pattern_CSharp
     {
         public RubberDuck()
         {
-            cry = new Squeak();
+            quackBehavior = new Squeak();
         }
     }
 
@@ -141,7 +151,7 @@ namespace Strategy_Pattern_CSharp
     {
         public DecoyDuck()
         {
-            cry = new MuteQuack();
+            quackBehavior = new MuteQuack();
         }
     }
 }
