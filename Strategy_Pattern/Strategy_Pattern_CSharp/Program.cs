@@ -7,16 +7,16 @@ namespace Strategy_Pattern_CSharp
         static void Main(string[] args)
         {
             // 通常のアヒルを生成
-            Duck duck = new Duck();
+            Duck duck = new Duck(new SmallQuack());
 
             // アメリカホシハジロを生成
-            Duck redHead = new RedHeadDuck();
+            Duck redHead = new RedHeadDuck(new Quack());
 
             // ゴムのアヒルを生成
-            Duck rubber = new RubberDuck();
+            Duck rubber = new RubberDuck(new Squeak());
 
             // 偽物のアヒルを生成
-            Duck decoy = new DecoyDuck();
+            Duck decoy = new DecoyDuck(new MuteQuack());
 
             // アヒルの鳴き声
             duck.quack();
@@ -106,11 +106,11 @@ namespace Strategy_Pattern_CSharp
         /// <summary>
         /// 鳴き声
         /// </summary>
-        protected QuackBehavior quackBehavior;
+        private QuackBehavior quackBehavior;
 
-        public Duck()
+        public Duck(QuackBehavior behavior)
         {
-            quackBehavior = new SmallQuack();
+            quackBehavior = behavior;
         }
 
         /// <summary>
@@ -127,9 +127,8 @@ namespace Strategy_Pattern_CSharp
     /// </summary>
     public class RedHeadDuck : Duck
     {
-        public RedHeadDuck()
+        public RedHeadDuck(QuackBehavior behavior) : base(behavior)
         {
-            quackBehavior = new Quack();
         }
     }
 
@@ -138,9 +137,8 @@ namespace Strategy_Pattern_CSharp
     /// </summary>
     public class RubberDuck : Duck
     {
-        public RubberDuck()
+        public RubberDuck(QuackBehavior behavior) : base(behavior)
         {
-            quackBehavior = new Squeak();
         }
     }
 
@@ -149,9 +147,8 @@ namespace Strategy_Pattern_CSharp
     /// </summary>
     public class DecoyDuck : Duck
     {
-        public DecoyDuck()
+        public DecoyDuck(QuackBehavior behavior) : base(behavior)
         {
-            quackBehavior = new MuteQuack();
         }
     }
 }
