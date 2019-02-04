@@ -106,7 +106,7 @@ namespace Strategy_Pattern_CSharp
         /// <summary>
         /// 鳴き声
         /// </summary>
-        private QuackBehavior quackBehavior;
+        readonly private QuackBehavior quackBehavior;
 
         public Duck(QuackBehavior behavior)
         {
